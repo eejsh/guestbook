@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic:: setContent(~{this::content} )}">
+
+  <th:block th:fragment="content">
+
+    <h1> 방명록 상세 보기 </h1>
+
+
+  <div class = "form-group">
+    <label>글번호</label>
+    <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
+
+  </div>
+
+    <div class = "form-group">
+      <label>제목</label>
+      <input type="text" class="form-control" name="gno" th:value="${dto.title}" readonly>
+
+    </div>
+
+    <div class = "form-group">
+      <label>내용</label>
+
+      <textarea class="form-control" rows="5" nane="content" readonly>[[${dto.content}]]</textarea>
+
+    </div>
+
+
+    <div class = "form-group">
+      <label>작성일</label>
+      <input class="form-control" name="regDate" readonly
+             th:value="${#temporals.format(dto.regDate, 'yyyy-MM/dd HH:mm')}" type="text">
+    </div>
+
+    <div class = "form-group">
+      <label>수정일</label>
+      <input class="form-control" name="modDate" readonly
+             th:value="${#temporals.format(dto.modDate, 'yyyy-MM/dd HH:mm')}" type="text">
+    </div>
+
+    <a th:href="@{/guestbook/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}" >
+      <button type ="button" class ="btn btn-info">목록보기</button>
+    </a>
+
+
+
+  </th:block>
+</th:block>
+<!--textarea 는 줄바꿈 있으면 공백이 들어감 -->
